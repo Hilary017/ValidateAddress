@@ -1,0 +1,217 @@
+.step-two{
+    background-color: white;
+    box-shadow: 0px 10px 5px rgba(223, 220, 220, 0.5);
+    width: 90%;
+    border-radius: 0.5rem;
+    position: absolute;
+    z-index: 10;
+    top: 17%;
+    left: 5%;
+    padding: 1rem;
+    margin-bottom: 100rem;
+}
+
+.step--text{
+    margin-top: -1rem;
+}
+
+.step2-form button{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 2rem;
+    border: 2px solid rgba(223, 220, 220, 0.5);
+    border-radius: 0.5rem;
+    background-color: #fff;
+}
+
+.step-two img{
+    margin-right: 1rem; 
+    height: 40px;
+}
+
+.advance-p{
+    margin-top: -0.7rem;
+}
+
+.arcade-p{
+    margin-top: -0.7rem;
+}
+
+.pro-p{
+    margin-bottom: -0.7rem;
+}
+
+.toggle--div{
+    background-color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 24px;
+    border-radius: 0.3rem;
+}
+
+.div--toggle{
+    margin-top: 12px;
+}
+
+.toggle--btn{
+    position: relative;
+}
+
+.toggle--div input{
+    width: 40px;
+    height: 20px;
+    border-radius: 2rem;
+    background-color: rgb(5, 21, 141);
+    transition: all 1s ease-in;
+    border: none;
+}
+
+.input-div{
+    text-align: start;
+    margin-top: 8px;
+}
+
+.span-right{
+    width: 15px;
+    height: 15px;
+    background-color: white;
+    position: absolute;
+    left: 20px;
+    border-radius: 50%;
+    margin: 2px 0;
+    transition: all 1s ease-in;
+}
+
+.span-left{
+    width: 15px;
+    height: 15px;
+    background-color: white;
+    position: absolute;
+    right: 20px;
+    border-radius: 50%;
+    margin: 2px 0;
+    transition: all 1s ease-in;
+}
+
+.toggle-text{
+    color: rgb(204, 199, 199);
+}
+
+.toggle--div p{
+    margin: 1rem;
+}
+
+.two-months {
+    margin-top: -0.7rem;
+}
+
+.input-div div{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.step2--img{
+    margin-top: -1rem;
+}
+
+#btn-focus{
+    border: 1px solid rgb(5, 21, 141);
+    background-color: aliceblue
+}
+
+.return-sect{
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 5px 5px 5px rgb(204, 199, 199);
+    width: 70%;
+    margin: auto;
+    margin-top: 2rem;
+    padding: 1rem;
+}
+
+.return-sect button{
+    background-color: rgb(253, 66, 66);
+    border: none;
+    padding: 0.3rem 1rem;
+    border-radius: 1rem;
+    color: white;
+}
+
+.desktop-two{
+    display: none;
+}
+
+@media (max-height: 500px) {
+    .step-two{
+        top: 35%;
+    }
+}
+
+@media (min-height: 800px){
+    .step-two{
+        top: 12%;
+    }
+}
+
+@media (min-height: 1000px) {
+    .step-two{
+        top: 12%;
+    }
+}
+
+
+@media (min-width: 992px) {
+    .step-footer{
+        display: none;
+    }
+
+    .footer--step{
+        display: none;
+    }
+
+    .step-two{
+        display: none;
+    }
+
+    .desktop-two{
+        display: block;
+    }
+
+    .step2-container{
+        width: 70%;
+        padding: 1rem 3rem;
+    }
+
+    .step2-form{
+        display: flex;
+    }
+
+    .second-input-div,
+    .first-input-div{
+        margin-left: 1rem;
+    }
+
+    .step2-form button{
+        height: 250px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 3rem 2rem 1rem 2rem;
+        border: 2px solid rgba(223, 220, 220, 0.5);
+        border-radius: 0.5rem;
+        background-color: #fff;
+    }
+
+    .desktop-footer{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10rem;
+    }
+}

@@ -1,0 +1,167 @@
+.finishing--up{
+    background-color: white;
+    box-shadow: 0px 10px 5px rgba(223, 220, 220, 0.5);
+    width: 90%;
+    border-radius: 0.5rem;
+    position: absolute;
+    z-index: 10;
+    top: 18%;
+    left: 5%;
+    padding: 1rem;
+}
+
+.confirm--sub{
+    background-color: #ffffff;
+    box-shadow: 0px 10px 5px rgba(223, 220, 220, 0.5);
+    width: 90%;
+    text-align: center;
+    border-radius: 0.5rem;
+    position: absolute;
+    z-index: 10;
+    top: 18%;
+    left: 5%;
+    padding: 3rem 2rem;
+    /* line-height: 43rem; */
+}
+
+.confirm--sub img{
+    width: 50px;
+}
+
+.confirm--sub p{
+    line-height: 1.6rem;
+}
+
+.confirm--div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+}
+
+.confirm--div a{
+    color: rgb(163, 157, 157);
+}
+
+.plan--bold{
+    font-weight: bolder;
+    margin-bottom: -0rem;
+}
+
+#confirm-plan{
+    border-bottom: 0.8px solid rgba(163, 157, 157, 0.5);
+    padding-bottom: 0.8rem;
+    margin-bottom: 1.3rem;
+}
+
+#larger--store{
+    margin-top: -1rem;
+}
+
+.confirm-sect{
+    background-color: aliceblue;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    margin-top: 2rem;
+}
+
+.total--div {
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.amount--p{
+    color: rgb(11, 26, 134);
+    font-weight: 200;
+}
+
+.total--div span{
+    color: rgb(49, 71, 239);
+    font-weight: bolder;
+}
+
+.confirm--p{
+    color: rgb(163, 157, 157);
+}
+
+.step-footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    padding: 0.7rem;
+    display: flex;
+    justify-content: end;
+}
+
+.footer--step{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.confirm--btn{
+    padding: 0.5rem;
+    background-color: rgb(49, 71, 239);
+    color: white;
+    border-radius: 0.3rem;
+    border:  none;
+}
+
+.back--btn{
+    padding: 0.5rem;
+    background-color: white;
+    color: rgb(163, 157, 157);
+    font-weight: bold;
+    border-radius: 0.3rem;
+    border:  none;
+}
+
+@media (min-width: 992px) {
+    .step-footer{
+        display: none;
+    }
+
+    .footer--step{
+        display: none;
+    }
+
+    .finishing--up{
+        display: none;
+    }
+
+    .finishing-container{
+        width: 70%;
+        padding: 1rem 5rem;
+    }
+
+    .confirm--sub{
+        display: none;
+    }
+
+    .desktop-confirm{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 70%;
+        /* margin: 0 5rem; */
+    }
+
+    .confirm--sect{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .desktop-confirm img{
+        width: 100px;
+    }
+}
