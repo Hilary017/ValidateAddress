@@ -66,7 +66,7 @@ const Step3 = () => {
     const customClickHandler = (e) => {
         e.preventDefault();
 
-        setCustomCheck(e.target.checked)
+        setCustomCheck(prev => !prev)
         setCustomFocus(prev => !prev)
 
         
