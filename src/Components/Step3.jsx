@@ -247,7 +247,7 @@ const Step3 = () => {
                             <div className="first--checkbox">
                                 <button value="Customizable profile" id={customFocus ? "btn-focus" : ""} onClick={customClickHandler}>
                                     <div className="checkbox--value">
-                                        <input checked={customCheck} onChange={customClickHandler} type="checkbox" id="Customizable profile" />
+                                        <input checked={customCheck} type="checkbox" id="Customizable profile" />
                                         <div className="checkbox--option">
                                             <p>Customizable profile</p>
                                             <p>Custom theme on your profile</p>
