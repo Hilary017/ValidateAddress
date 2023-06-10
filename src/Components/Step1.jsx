@@ -80,9 +80,9 @@ const Step1 = () => {
         const regexTest = regex.test(desktopEmailValue);
 
         if(!regexTest) {
-            setEmailValid(false);
+            setDesktopEmailValid(false);
         } else {
-            setEmailValid(true);
+            setDesktopEmailValid(true);
         }
         
         console.log(regexTest)
@@ -98,36 +98,77 @@ const Step1 = () => {
         }
     }
 
+    const desktopPhoneNumberHandler = (e) => {
+        const desktopPhoneValue = desktopPhone.current.value;
+        
+        if(desktopPhoneValue === "" || isNaN(desktopPhoneValue)) {
+            setDesktopPhoneValid(false);
+        } else {
+            setDesktopPhoneValid(true)
+        }
+    }
+
     const formSubmitHandler = (e) => {
         e.preventDefault();
         const nameValue = name.current.value;
         const emailValue = email.current.value;
         const phoneValue = phone.current.value;
-        const desktopNameValue = desktopName.current.value;
-        const desktopEmailValue = desktopEmail.current.value;
 
         const regex = /^\S+@\S+\.\S+/
         const regexTest = regex.test(emailValue);
-        const desktopRegTest = regex.test(desktopEmailValue);
 
-        if(nameValue === "" &&
-            desktopNameValue === "" ||
-            !regexTest &&
-            !desktopRegTest ||
+        if(nameValue === ""||
+            !regexTest||
             !phoneValue ||
             isNaN(phoneValue) 
         ) {
             nameChangeHandler();
             emailChangeHandler();
             phoneNumberHandler();
-            desktopNameChangeHandler();
-            desktopEmailChangeHandler();
             return;
         } else {
             const formValue = {
                 name: nameValue,
                 email: emailValue,
                 phone: phoneValue,
+                step2: true
+            }
+            console.log(formValue);
+            dispatch(formActions.step1(formValue))
+            console.log(formInfo);
+            nameVal = "formInfo.name";
+            emailVal = formInfo.email;
+            phoneVal = formInfo.phone;
+
+            console.log(nameVal, emailVal, phoneVal)
+            navigate("step-2");
+        }
+    }
+
+    const desktopFormSubmitHandler = (e) => {
+        e.preventDefault();
+
+        const desktopNameValue = desktopName.current.value;
+        const desktopEmailValue = desktopEmail.current.value;
+        const desktopPhoneValue = desktopPhone.current.value;
+
+        const regex = /^\S+@\S+\.\S+/
+        const desktopRegTest = regex.test(desktopEmailValue);
+
+        if(desktopNameValue === "" ||
+            !desktopRegTest ||
+            !desktopPhoneValue ||
+            isNaN(desktopPhoneValue) 
+        ) {
+            desktopNameChangeHandler();
+            desktopEmailChangeHandler();
+            desktopPhoneNumberHandler()
+            return;
+        } else {
+            const formValue = {
+                name: desktopNameValue,
+                email: desktopEmailValue,
+                phone: desktopPhoneValue,
                 step2: true
             }
             console.log(formValue);
@@ -220,8 +261,8 @@ const Step1 = () => {
                             ref={desktopEmail} 
                             defaultValue={formInfo.email}
                             className={!desktopEmailValid ? "error--state" : ""} 
-                            onBlur={emailChangeHandler} 
-                            onChange={emailChangeHandler} 
+                            onBlur={desktopEmailChangeHandler} 
+                            onChange={desktopEmailChangeHandler} 
                             placeholder="e.g. stephenking@lorem.com" />
                         {!desktopEmailValid && <p className="error-text">invalid email</p>}
                     </div>
@@ -233,13 +274,13 @@ const Step1 = () => {
                             ref={desktopPhone} 
                             defaultValue={formInfo.phone}
                             className={!desktopPhoneValid ? "error--state" : ""} 
-                            onBlur={phoneNumberHandler} 
-                            onChange={phoneNumberHandler} 
+                            onBlur={desktopPhoneNumberHandler} 
+                            onChange={desktopPhoneNumberHandler} 
                             placeholder="e.g. +1 234 567 890" />
                         {!desktopPhoneValid && <p className="error-text">invalid phone number</p>}
                     </div>
-                    <div className="desktop-footer">
-                        <button className="next--btn" onClick={formSubmitHandler}>Next Step</button>
+                    <div className="step1--footer">
+                        <button className="next--btn" onClick={desktopFormSubmitHandler}>Next Step</button>
                     </div>
                 </form>
             </div>

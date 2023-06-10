@@ -66,7 +66,7 @@ const Step3 = () => {
     const customClickHandler = (e) => {
         e.preventDefault();
 
-        setCustomCheck(prev => !prev)
+        setCustomCheck(e.target.checked)
         setCustomFocus(prev => !prev)
 
         
@@ -178,10 +178,10 @@ const Step3 = () => {
                                             <input type="checkbox" checked={onlineCheck} id="Online Service" />
                                             <div className="checkbox--option">
                                                 <p>Online service</p>
-                                                <p>Access to multiplayer games</p>
+                                                <p className="checkbox-text">Access to multiplayer games</p>
                                             </div>
                                         </div>
-                                        {formInfo.span === "Monthly" ? <p>+$1/mo</p> : <p>+$10/yr</p> }
+                                        {formInfo.span === "Monthly" ? <p className="addons--amount">+$1/mo</p> : <p className="addons--amount">+$10/yr</p> }
                                     </button>
                                 </div>
                                 <div className="first--checkbox">
@@ -190,10 +190,10 @@ const Step3 = () => {
                                             <input checked={largerCheck} type="checkbox" id="Larger storage" />
                                             <div className="checkbox--option">
                                                 <p>Larger storage</p>
-                                                <p>Extra 1TB of cloud save</p>
+                                                <p className="checkbox-text">Extra 1TB of cloud save</p>
                                             </div>
                                         </div>
-                                        {formInfo.span === "Monthly" ? <p>+$2/mo</p> : <p>+$20/yr</p> }
+                                        {formInfo.span === "Monthly" ? <p className="addons--amount">+$2/mo</p> : <p className="addons--amount">+$20/yr</p> }
                                     </button>
                                 </div>
                                 <div className="first--checkbox">
@@ -202,10 +202,10 @@ const Step3 = () => {
                                             <input checked={customCheck} type="checkbox" id="Customizable profile" />
                                             <div className="checkbox--option">
                                                 <p>Customizable profile</p>
-                                                <p>Custom theme on your profile</p>
+                                                <p className="checkbox-text">Custom theme on your profile</p>
                                             </div>
                                         </div>
-                                        {formInfo.span === "Monthly" ? <p>+$2/mo</p> : <p>+$20/yr</p> }
+                                        {formInfo.span === "Monthly" ? <p className="addons--amount">+$2/mo</p> : <p>+$20/yr</p> }
                                         {/* <input type="text" value={formInfo.span === "Monthly" && "+$2/mo"} />
                                         <input type="text" value={formInfo.span !== "Monthly" && "+$20/yr"} /> */}
                                     </button>
@@ -247,19 +247,17 @@ const Step3 = () => {
                             <div className="first--checkbox">
                                 <button value="Customizable profile" id={customFocus ? "btn-focus" : ""} onClick={customClickHandler}>
                                     <div className="checkbox--value">
-                                        <input checked={customCheck} type="checkbox" id="Customizable profile" />
+                                        <input checked={customCheck} onChange={customClickHandler} type="checkbox" id="Customizable profile" />
                                         <div className="checkbox--option">
                                             <p>Customizable profile</p>
                                             <p>Custom theme on your profile</p>
                                         </div>
                                     </div>
                                     {formInfo.span === "Monthly" ? <p>+$2/mo</p> : <p>+$20/yr</p> }
-                                    {/* <input type="text" value={formInfo.span === "Monthly" && "+$2/mo"} />
-                                    <input type="text" value={formInfo.span !== "Monthly" && "+$20/yr"} /> */}
                                 </button>
                             </div>
                         </form>
-                        <div className="desktop-footer">
+                        <div className="desktop-footer step1--footer">
                             <button className="back--btn" onClick={completePreviousStep}>Go Back</button>
                             <button className="next--btn" onClick={formSubmitHandler}>Next Step</button>
                         </div>

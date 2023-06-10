@@ -8,6 +8,10 @@ body {
   background-color: aliceblue;
 }
 
+button{
+  cursor: pointer;
+}
+
 @media (min-width: 992px){
   body{
     padding: 2rem 5rem;

@@ -174,8 +174,6 @@ const Step2 = () => {
                         <form className="step2-form">
                             <div className="input-div">
                                 <button onClick={arcadeClickHandler} onBlur={arcadeHandler} id={arcadeFocus ? "btn-focus" : ""} value="Arcade"> 
-                                    {/* <input type="hidden" value={toggle ? 9 : 90} />
-                                    <input type="hidden" value={!toggle ? 9 : 90} /> */}
                                     <div className="step2-img">
                                         <img src={arcade} alt="" className={!toggle ? "step2--img" : null} />
                                     </div>
@@ -188,8 +186,6 @@ const Step2 = () => {
                             </div>
                             <div className="input-div">
                                 <button onClick={advanceClickHandler} onBlur={advanceHandler} id={advanceFocus ? "btn-focus" : ""} className={advanceFocus ? "button--focus" : ""} value="Advanced">
-                                    {/* <input type="hidden" value={toggle ? 12 : 120} />
-                                    <input type="hidden" value={!toggle ? 12 : 120} /> */}
                                     <div className="step2-img">
                                         <img src={advanced} alt="" className={!toggle ? "step2--img" : null} />
                                     </div>
@@ -202,8 +198,6 @@ const Step2 = () => {
                             </div>
                             <div className="input-div">
                                 <button onClick={proClickHandler} onBlur={proHandler} id={proFocus ? "btn-focus" : ""} className={proFocus ? "button--focus" : ""} value="Pro">
-                                    {/* <input type="hidden" value={toggle ? 15 : 150} />
-                                    <input type="hidden" value={!toggle ? 15 : 150} /> */}
                                     <div >
                                         <img src={pro} alt="" className={!toggle ? "step2--img" : null} />
                                     </div>
@@ -277,7 +271,7 @@ const Step2 = () => {
                         </div>
                         <p>Yearly</p>
                     </div>
-                    <div className="desktop-footer">
+                    <div className="desktop-footer step1--footer">
                         <button className="back--btn" onClick={completePreviousStep}>Go Back</button>
                         <button className="next--btn" onClick={formSubmitHandler}>Next Step</button>
                     </div>

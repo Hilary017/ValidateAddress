@@ -13,6 +13,7 @@
 
 .step--text{
     margin-top: -1rem;
+    margin-bottom: 1.7rem;
 }
 
 .step2-form button{
@@ -60,6 +61,10 @@
     position: relative;
 }
 
+.toggle--btn input{
+    color: rgb(5, 21, 141);
+}
+
 .toggle--div input{
     width: 40px;
     height: 20px;
@@ -71,7 +76,7 @@
 
 .input-div{
     text-align: start;
-    margin-top: 8px;
+    margin-top: -0.5rem;
 }
 
 .span-right{
@@ -79,6 +84,7 @@
     height: 15px;
     background-color: white;
     position: absolute;
+    top: 0.7px;
     left: 20px;
     border-radius: 50%;
     margin: 2px 0;
@@ -90,6 +96,7 @@
     height: 15px;
     background-color: white;
     position: absolute;
+    top: 0.7px;
     right: 20px;
     border-radius: 50%;
     margin: 2px 0;
@@ -116,7 +123,7 @@
 }
 
 .step2--img{
-    margin-top: -1rem;
+    margin-top: 0rem;
 }
 
 #btn-focus{
@@ -127,7 +134,7 @@
 .return-sect{
     text-align: center;
     background-color: #fff;
-    box-shadow: 5px 5px 5px rgb(204, 199, 199);
+    /* box-shadow: 5px 5px 5px rgb(204, 199, 199); */
     width: 70%;
     margin: auto;
     margin-top: 2rem;
@@ -213,5 +220,9 @@
         display: flex;
         justify-content: space-between;
         margin-top: 10rem;
+    }
+
+    .step1--footer button{
+        padding: 1rem;
     }
 }

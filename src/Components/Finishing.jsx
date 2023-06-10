@@ -127,14 +127,14 @@ const Finishing = () => {
                                             <div>
                                                 <p className="confirm--p">{value.online}</p>
                                             </div>
-                                            <p>+$<span className="amount--p">{value.onlineAmount}/{value.span === "Yearly" ? "yr" : "mo"}</span></p>
+                                            <p><span className="amount--p">+${value.onlineAmount}/{value.span === "Yearly" ? "yr" : "mo"}</span></p>
                                         </div>}
                                     {value.larger &&
                                         <div className="confirm--div" id="larger--store">
                                             <div>
                                                 <p className="confirm--p">{value.larger}</p>
                                             </div>
-                                            <p>+$<span className="amount--p">{value.largerAmount}/{value.span === "Yearly" ? "yr" : "mo"}</span></p>
+                                            <p><span className="amount--p">+${value.largerAmount}/{value.span === "Yearly" ? "yr" : "mo"}</span></p>
                                         </div>
                                     }
                                     {value.custom &&
@@ -142,7 +142,7 @@ const Finishing = () => {
                                             <div>
                                                 <p className="confirm--p">{value.custom}</p>
                                             </div>
-                                            <p>+$<span className="amount--p">{value.customAmount}/{value.span === "Yearly" ? "yr" : "mo"}</span></p>
+                                            <p><span className="amount--p">+${value.customAmount}/{value.span === "Yearly" ? "yr" : "mo"}</span></p>
                                         </div>
                                     }
                                 </div>
@@ -153,9 +153,9 @@ const Finishing = () => {
                                                                         +value.largerAmount + 
                                                                         +value.customAmount}/{value.span === "Yearly" ? "yr" : "mo"}</span></p>
                                 </div>
-                                <div className="desktop-footer">
+                                <div className="desktop-footer step1--footer">
                                     <button className="back--btn" onClick={completePreviousStep}>Go Back</button>
-                                    <button className="next--btn" onClick={formSubmitHandler}>Next Step</button>
+                                    <button className="next--btn" id="confirm" onClick={formSubmitHandler}>Confirm</button>
                                 </div>
                             </div>
                     </div>
