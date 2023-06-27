@@ -1,0 +1,235 @@
+.add_collection{
+    background-color: #ffffff;
+    width: 90%;
+    max-width: 500px;
+    height: 500px;
+    margin: auto;
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5rem;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px rgba(116, 117, 116, 0.5);
+    position: relative;
+}
+
+.add_collection input{
+    width: 70%;
+    height: 50px;
+    text-indent: 20px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    font-size: 1.2rem;
+}
+
+textarea {
+    width: 80%;
+}
+
+.confirm__btn{
+    background-color: rgb(0, 255, 0);
+    color: white;
+    font-size: 1rem;
+    border: none;
+    margin-top: 0.5rem;
+    border-radius: 5px;
+    padding: 1rem;
+}
+
+.cancel_btn{
+    border-radius: 5px;
+}
+
+.add_value{
+    position: absolute;
+    top: 135px;
+    background-color: aliceblue;
+    width: 80%;
+    height: 300px;
+    overflow-y: scroll;
+    text-align: left;
+    cursor: pointer;
+}
+
+.add_value button{
+    border: none;
+    width: 100%;
+    /* height: 300px; */
+    background-color: white;
+    /* margin-top: 2rem; */
+    border-bottom: 0.02px solid black;
+    padding: 20px 0;
+}
+
+.mappings_sect{
+    background-color: #ffffff;
+    position: fixed;
+    z-index: 100;
+    width: 90%;
+    left: 5%;
+    top: 10%;
+}
+
+.confirm_sect{
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    z-index: 100;
+    height: 400px;
+    left: 0%;
+    width: 100%;
+    top: 10%;
+}
+
+.confirm_division{
+    display: none;
+}
+
+.modal_button{
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.modal_button button{
+    padding: 0.8rem;
+    margin: 0 1rem;
+    border: none;
+}
+
+.mappings_division{
+    display: none;
+}
+
+.modal_backdrop{
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(185, 186, 185, 0.5);
+    z-index: 10;
+    top: 0;
+    left: 0;
+}
+
+.confirm_submit{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2rem;
+    height: 500px;
+    /* justify-content: center; */
+    background-color: #ffffff;
+    width: 80%;
+    border-radius: 1rem;
+    max-width: 600px;
+}
+
+.confirm_submit div{
+    margin: 1rem 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.confirm_submit input{
+    width: 80%;
+    height: 50px;
+    border-radius: 10px;
+    text-indent: 1rem;
+    border: 1px solid rgba(185, 186, 185, 0.5);
+}
+
+.confirm_submit input:focus,
+.confirm_submit input:active{
+    border: 1px solid rgb(68, 139, 247);
+    outline: 1px solid rgba(185, 248, 112, 0.5);
+}
+
+.error__text{
+    color: red;
+    margin: 0;
+    margin-top: -1rem;
+    font-size: 0.8rem;
+    text-align: left;
+}
+
+.map_confirmation{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.map_confirmation div{
+    background-color: white;
+    position: fixed;
+    top: 30%;
+    z-index: 100;
+    width: 80%;
+    border-radius: 1rem;
+    max-width: 500px;
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.3rem;
+}
+
+.loading__text{
+    margin: 0;
+    margin-top: -1rem;
+}
+
+.map_confirmation button {
+    background-color:rgb(0, 255, 0);
+    border: none;
+    padding: 1rem;
+    border-radius: 10px;
+    color: white;
+}
+
+@media (min-width: 925px) {
+    .confirm_submit{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 2rem;
+        height: 500px;
+        /* justify-content: center; */
+        background-color: #ffffff;
+        width: 50%;
+        max-width: 600px;
+    }
+    
+    .confirm_submit div{
+        margin: 1rem 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .confirm_submit input{
+        width: 70%;
+        height: 50px;
+        border-radius: 10px;
+        text-indent: 1rem;
+        border: 1px solid rgba(185, 186, 185, 0.5);
+    }
+    
+    .confirm_submit input:focus,
+    .confirm_submit input:active{
+        border: 1px solid rgb(68, 139, 247);
+        outline: 1px solid rgba(185, 248, 112, 0.5);
+    }
+
+    /* .map_confirmation div{
+        background-color: white;
+        position: fixed;
+        top: 30%;
+        z-index: 100;
+        width: 50%;
+        border-radius: 1rem;
+        max-width: 500px;
+        text-align: center;
+        padding: 1rem;
+        font-size: 1.3rem;
+    } */
+}
