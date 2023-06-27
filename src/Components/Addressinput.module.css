@@ -38,7 +38,13 @@ textarea {
 }
 
 .cancel_btn{
+    background-color: rgb(150, 150, 150);
+    color: white;
+    font-size: 1rem;
+    border: none;
+    margin-top: 0.5rem;
     border-radius: 5px;
+    padding: 1rem;
 }
 
 .add_value{
@@ -152,6 +158,14 @@ textarea {
     margin-top: -1rem;
     font-size: 0.8rem;
     text-align: left;
+}
+
+.text__error{
+    color: red;
+    margin: 0;
+    margin-top: -1rem;
+    font-size: 0.7rem;
+    text-align: center;
 }
 
 .map_confirmation{

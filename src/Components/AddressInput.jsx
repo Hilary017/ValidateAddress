@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import ReactDom from "react-dom";
 import maplibregl from 'maplibre-gl';
 import swal from "sweetalert";
 
@@ -6,12 +7,17 @@ import classes from "./Addressinput.module.css";
 
 const locationiqKey = "pk.715caf1e4ee375ad5db1db5f9ff277df";
 
+const Backdrop = props => {
+    return <div onClick={props.onClick} className={classes.modal_backdrop}></div>
+}
+
 
 const AddressInput = () => {
     const [address, setAddress] =  useState("");
     const [addresses, setAddresses] =  useState([]);
     const [showOptions, setShowOptions] = useState(true);
-    const [formSubmit, setFormSubmit] = useState(false);
+    const [showForm, setShowForm] = useState(true);
+    const [showMap, setShowMap] = useState(false);
     const [confirmFormSubmit, setConfirmFormSubmit] = useState(false);
     const [confirmSubmit, setConfirmSubmit] = useState(false);
     const [firstNameValid, setFirstNameValid] = useState(true);
@@ -87,30 +93,29 @@ const AddressInput = () => {
         setAddress(e.target.value)
     }
 
-    // const gatherValueHandler = () => {        
-    //     const targetDiv = e.target.closest("div")
-    //     const targetButton = targetDiv.querySelector('button')
-
-    // }
-
     const buttonSelectHandler = (e) => {
             e.preventDefault(), 
             setAddress(e.target.value), 
             setShowOptions(false)
     }
 
-    const closeModalHandler = (e) => {
-        e.preventDefault()
-        setFormSubmit(false)
-    }
-
     const closeConfirmModal = (e) => {
         e.preventDefault()
         setConfirmSubmit(false)
+        setIsSubmitLoading(false);
+        setIsLoading(false);
+        setFirstNameValid(true);
+        setLastNameValid(true);
+        setEmailValid(true);
+        setSubmitError("")
+        firstName.current.value = ""
+        lastName.current.value = ""
+        email.current.value = ""
     }
 
     const confirmFormSubmitHandler = () => {
         setConfirmFormSubmit(false);
+        setShowForm(false);
 
         let map = new maplibregl.Map({
             container: 'map',
@@ -138,11 +143,11 @@ const AddressInput = () => {
                 }
             });
         });
-        setFormSubmit(true);
     }
 
     const mapLoadHandler = (e) => {
         e.preventDefault(); 
+        setShowMap(true);
 
         if(!address) {
             swal({
@@ -176,7 +181,6 @@ const AddressInput = () => {
 
     const confirmSubmitHandler = (e) => {
         e.preventDefault();
-        setIsSubmitLoading(true);
 
         const firstNameValue = firstName.current.value;
         const lastNameValue = lastName.current.value;
@@ -218,6 +222,8 @@ const AddressInput = () => {
             coordinates: addressData.geojson.coordinates
         }
 
+        setIsSubmitLoading(true);
+
         fetch("https://addressvalidator.onrender.com/register", {
             method: "POST",
             body: JSON.stringify(formValue),
@@ -232,7 +238,9 @@ const AddressInput = () => {
                 button: "Ok"
               }).then(() => {
                 setIsSubmitLoading(false)
-                setFormSubmit(false)
+                // setFormSubmit(false)
+                setShowMap(false);
+                setShowForm(true)
                 setConfirmSubmit(false)
                 setAddress("")
                 setSubmitError("")
@@ -250,16 +258,20 @@ const AddressInput = () => {
 
     const confirmMapHandler = (e) => {
         e.preventDefault()
-        setFormSubmit(false)
         setConfirmSubmit(true)
+    }
+
+    const closeMapHandler = () => {
+        setShowForm(true);
+        setShowMap(false)
     }
 
    
 
     return (
         <div>
-            {isLoading && <div className={classes.modal_backdrop}></div>}
-            {/* {isLoading && <Modal />} */}
+            {isLoading && ReactDom.createPortal(<Backdrop />, document.getElementById("backdrop-root"))}
+            {showForm && 
             <form className={classes.add_collection} onSubmit={mapLoadHandler} onClick={() => {setShowOptions(false)}}>
                 {error && <p className={classes.error__text}>{error}</p>}
                 <textarea cols="40" rows="5" placeholder="Enter your address here" onChange={addressChangeHandler} value={address} /> <br />
@@ -272,8 +284,20 @@ const AddressInput = () => {
                             </button>
                         }) 
                     }
-                </div>}
-            </form>
+                </div> }
+            </form> 
+            }
+            {showMap && 
+            <div className={`${classes.mappings_sec}${classes.mappings_divisio}`}>   
+                <div id='map'>
+                    
+                </div>
+                <div className={classes.modal_button}>
+                    <button className={classes.cancel_btn} onClick={closeMapHandler}>Close</button>
+                    <button className={classes.confirm__btn} onClick={confirmMapHandler}>Confirm</button>
+                </div>
+            </div>
+            }
             {confirmFormSubmit && <div className={classes.modal_backdrop}></div>}
             {confirmFormSubmit && <div className={classes.map_confirmation}>   
                 <div>
@@ -282,21 +306,10 @@ const AddressInput = () => {
                     <button onClick={confirmFormSubmitHandler}>OK</button>
                 </div>
             </div>}
-
-            {formSubmit && <div className={classes.modal_backdrop} onClick={closeModalHandler}></div>}
-            <div className={formSubmit ? `${classes.mappings_sect}` : `${classes.mappings_division}`}>   
-                <div id='map'>
-                    
-                </div>
-                <div className={classes.modal_button}>
-                    <button className={classes.cancel_btn} onClick={closeModalHandler}>Close</button>
-                    <button className={classes.confirm__btn} onClick={confirmMapHandler}>Confirm</button>
-                </div>
-            </div>
-            {confirmSubmit && <div className={classes.modal_backdrop} onClick={closeConfirmModal}></div>}
+            {confirmSubmit && ReactDom.createPortal(<Backdrop  onClick={closeConfirmModal} />, document.getElementById("backdrop-root"))}
             <div className={confirmSubmit ? `${classes.confirm_sect}` : `${classes.confirm_division}`}>   
                 <form className={classes.confirm_submit}>
-                    {submitError && <p className={classes.error__text}>{submitError}</p>}
+                    {submitError && <p className={classes.text__error}>{submitError}</p>}
                     <div>
                         <input type="text" name="First Name" ref={firstName} placeholder="First Name" onChange={firstNameHandler} onBlur={firstNameHandler} />
                     </div>
@@ -314,7 +327,7 @@ const AddressInput = () => {
                     </div>
                     {isSubmitLoading && <p className={classes.loading__text}>Loading...</p>}
                     <div className={classes.modal_button}>
-                        <button className={classes.cancel_btn} onClick={closeConfirmModal}>Cancel</button>
+                        <button className={classes.cancel_btn} disabled={isSubmitLoading} onClick={closeConfirmModal}>Cancel</button>
                         <button className={classes.confirm__btn} onClick={confirmSubmitHandler}>Confirm</button>
                     </div>
                 </form>
