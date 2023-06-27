@@ -101,6 +101,11 @@ const AddressInput = () => {
 
     const closeConfirmModal = (e) => {
         e.preventDefault()
+
+        if(isSubmitLoading) {
+            return;
+        }
+
         setConfirmSubmit(false)
         setIsSubmitLoading(false);
         setIsLoading(false);
@@ -327,7 +332,7 @@ const AddressInput = () => {
                     </div>
                     {isSubmitLoading && <p className={classes.loading__text}>Loading...</p>}
                     <div className={classes.modal_button}>
-                        <button className={classes.cancel_btn} disabled={isSubmitLoading} onClick={closeConfirmModal}>Cancel</button>
+                        <button className={classes.cancel_btn} onClick={closeConfirmModal}>Cancel</button>
                         <button className={classes.confirm__btn} onClick={confirmSubmitHandler}>Confirm</button>
                     </div>
                 </form>
