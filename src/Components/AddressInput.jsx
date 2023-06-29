@@ -122,12 +122,20 @@ const AddressInput = () => {
         setConfirmFormSubmit(false);
         setShowForm(false);
 
+        const endPoint = []
+
+        endPoint.push(addressData.lon)
+        endPoint.push(addressData.lat)
+
+        // let start = [-74.5, 40];
+        // let end = endPoint;
+
         let map = new maplibregl.Map({
             container: 'map',
             attributionControl: false, //need this to show a compact attribution icon (i) instead of the whole text
             style: 'https://tiles.locationiq.com/v3/streets/vector.json?key='+locationiqKey,
-            zoom: 12,
-            center: [-122.42, 37.779]
+            zoom: 16,
+            center: endPoint
         });
         
         map.on('load', function () {
@@ -172,7 +180,7 @@ const AddressInput = () => {
                 setIsLoading(false)
                 return;
             } 
-
+            console.log(`https://eu1.locationiq.com/v1/search?key=pk.715caf1e4ee375ad5db1db5f9ff277df&q=${address}&format=json&polygon_geojson=1`)
             setAddressData(resData[0]);
             setError("")
             setIsLoading(false)
@@ -284,7 +292,7 @@ const AddressInput = () => {
                 {addresses.length > 0 &&
                 <div className={classes.add_value} style={!showOptions ? { display: "none" } : null} onBlur={() => {setShowOptions(false)}}>
                     {addresses.length > 0 && addresses.map(address => {
-                            return <button value={address.display_address} key={address.osm_id} onClick={buttonSelectHandler} >
+                            return <button value={address.display_address} key={address.osm_id + Math.random()} onClick={buttonSelectHandler} >
                                 {address.display_address}
                             </button>
                         }) 
@@ -297,6 +305,7 @@ const AddressInput = () => {
                 <div id='map'>
                     
                 </div>
+                <p style={{textAlign: "center", marginBottom: "0px", fontSize: "0.7rem"}}>Kindly adjust the map (zoom in or out) to confirm you address on the polygon</p>
                 <div className={classes.modal_button}>
                     <button className={classes.cancel_btn} onClick={closeMapHandler}>Close</button>
                     <button className={classes.confirm__btn} onClick={confirmMapHandler}>Confirm</button>
@@ -333,7 +342,7 @@ const AddressInput = () => {
                     {isSubmitLoading && <p className={classes.loading__text}>Loading...</p>}
                     <div className={classes.modal_button}>
                         <button className={classes.cancel_btn} onClick={closeConfirmModal}>Cancel</button>
-                        <button className={classes.confirm__btn} onClick={confirmSubmitHandler}>Confirm</button>
+                        <button className={classes.confirm__btn} onClick={confirmSubmitHandler}>Submit</button>
                     </div>
                 </form>
             </div>
