@@ -34,6 +34,10 @@ const AddressInput = () => {
     const email = useRef();
 
     useEffect(() => {
+        if(!address) {
+            return;
+        }
+        
         const addressHandler = setTimeout(() => {
             fetch(`https://api.locationiq.com/v1/autocomplete?key=${locationiqKey}&q=${address}`)
             .then(res => {
@@ -127,16 +131,33 @@ const AddressInput = () => {
         endPoint.push(addressData.lon)
         endPoint.push(addressData.lat)
 
+        if(!addressData.geojson) {
+            const map = new maplibregl.Map({
+                container: 'map',
+                style:
+                    'https://api.maptiler.com/maps/streets/style.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL',
+                center: endPoint,
+                zoom: 16
+            });
+        
+            new maplibregl.Marker()
+                .setLngLat(endPoint)
+                .addTo(map);
+            return;
+        }
+ 
         // let start = [-74.5, 40];
         // let end = endPoint;
 
         let map = new maplibregl.Map({
             container: 'map',
             attributionControl: false, //need this to show a compact attribution icon (i) instead of the whole text
-            style: 'https://tiles.locationiq.com/v3/streets/vector.json?key='+locationiqKey,
+            style: 'https://tiles.locationiq.com/v3/light/vector.json?key='+locationiqKey,
             zoom: 16,
             center: endPoint
         });
+
+        
         
         map.on('load', function () {
             map.addLayer({
@@ -172,7 +193,10 @@ const AddressInput = () => {
         }
 
         setIsLoading(true)
-        fetch(`https://eu1.locationiq.com/v1/search?key=pk.715caf1e4ee375ad5db1db5f9ff277df&q=${address}&format=json&polygon_geojson=1`)
+
+        // console.log(`https://us1.locationiq.com/v1/search?key=pk.715caf1e4ee375ad5db1db5f9ff277df&q=${address}&format=json&polygon_geojson=1`)
+        // fetch(`https://eu1.locationiq.com/v1/search?key=pk.715caf1e4ee375ad5db1db5f9ff277df&q=${address}&format=json&polygon_geojson=1`)
+        fetch(`https://us1.locationiq.com/v1/search?key=pk.715caf1e4ee375ad5db1db5f9ff277df&q=${address}&format=json&polygon_geojson=1`)
         .then(res => res.json())
         .then(resData => {
             if(resData.error) {
@@ -180,7 +204,8 @@ const AddressInput = () => {
                 setIsLoading(false)
                 return;
             } 
-            console.log(`https://eu1.locationiq.com/v1/search?key=pk.715caf1e4ee375ad5db1db5f9ff277df&q=${address}&format=json&polygon_geojson=1`)
+
+            
             setAddressData(resData[0]);
             setError("")
             setIsLoading(false)
@@ -305,7 +330,7 @@ const AddressInput = () => {
                 <div id='map'>
                     
                 </div>
-                <p style={{textAlign: "center", marginBottom: "0px", fontSize: "0.7rem"}}>Kindly adjust the map (zoom in or out) to confirm you address on the polygon</p>
+                <p style={{textAlign: "center", marginBottom: "0px", fontSize: "0.7rem"}}>Kindly adjust the map (zoom in or out) to confirm you address.</p>
                 <div className={classes.modal_button}>
                     <button className={classes.cancel_btn} onClick={closeMapHandler}>Close</button>
                     <button className={classes.confirm__btn} onClick={confirmMapHandler}>Confirm</button>
