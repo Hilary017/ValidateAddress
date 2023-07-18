@@ -5,7 +5,7 @@ import swal from "sweetalert";
 
 import classes from "./Addressinput.module.css";
 
-const locationiqKey = "pk.715caf1e4ee375ad5db1db5f9ff277df";
+
 
 const Backdrop = props => {
     return <div onClick={props.onClick} className={classes.modal_backdrop}></div>
@@ -28,6 +28,8 @@ const AddressInput = () => {
     const [addressData, setAddressData] = useState({});
     const [error, setError] = useState("");
     const [submitError, setSubmitError] = useState("");
+
+    const locationiqKey = "pk.715caf1e4ee375ad5db1db5f9ff277df";
 
     const firstName = useRef();
     const lastName = useRef();
@@ -131,20 +133,31 @@ const AddressInput = () => {
         endPoint.push(addressData.lon)
         endPoint.push(addressData.lat)
 
-        if(!addressData.geojson) {
+        if(!addressData.geojson || addressData.geojson.type !== "Polygon") {
             const map = new maplibregl.Map({
                 container: 'map',
-                style:
-                    'https://api.maptiler.com/maps/streets/style.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL',
-                center: endPoint,
-                zoom: 16
+                attributionControl: false, 
+                style: 'https://tiles.locationiq.com/v3/streets/vector.json?key='+locationiqKey,
+                zoom: 18,
+                center: endPoint
             });
+
+            
+            var el2 = document.createElement('div');
+            el2.className = 'marker';
+            el2.style.backgroundImage = 'url(https://maps.locationiq.com/v3/samples/marker50px.png)';
+            el2.style.width = '50px';
+            el2.style.height = '50px';
+            
         
-            new maplibregl.Marker()
+            new maplibregl.Marker(el2)
                 .setLngLat(endPoint)
                 .addTo(map);
+
             return;
         }
+
+        
  
         // let start = [-74.5, 40];
         // let end = endPoint;
@@ -197,15 +210,19 @@ const AddressInput = () => {
         // console.log(`https://us1.locationiq.com/v1/search?key=pk.715caf1e4ee375ad5db1db5f9ff277df&q=${address}&format=json&polygon_geojson=1`)
         // fetch(`https://eu1.locationiq.com/v1/search?key=pk.715caf1e4ee375ad5db1db5f9ff277df&q=${address}&format=json&polygon_geojson=1`)
         fetch(`https://us1.locationiq.com/v1/search?key=pk.715caf1e4ee375ad5db1db5f9ff277df&q=${address}&format=json&polygon_geojson=1`)
-        .then(res => res.json())
+        .then(res => {
+            if(!res.ok) {
+                throw new Error("oops! something went wrong")
+            }
+            return res.json()
+        })
         .then(resData => {
             if(resData.error) {
                 setError(resData.error);
                 setIsLoading(false)
                 return;
             } 
-
-            
+            console.log(resData);
             setAddressData(resData[0]);
             setError("")
             setIsLoading(false)
@@ -243,8 +260,8 @@ const AddressInput = () => {
             }
 
         if(!addressData.lon || 
-            !addressData.lat ||
-            !addressData.geojson.coordinates
+            !addressData.lat 
+            // || !addressData.geojson
             ) {
                 setSubmitError("opps! something went wrong. Kindly check your address.");
                 return;
@@ -257,18 +274,25 @@ const AddressInput = () => {
             address: address,
             longitude: addressData.lon,
             latitude: addressData.lat,
-            coordinates: addressData.geojson.coordinates
+            coordinates: addressData.geojson ? addressData.geojson.coordinates : []
         }
 
         setIsSubmitLoading(true);
 
         fetch("https://addressvalidator.onrender.com/register", {
+        // fetch("http://localhost:3000/register", {
             method: "POST",
             body: JSON.stringify(formValue),
             headers: {
                 "Content-Type": "application/json"
             }
-        }).then(() => {
+        }).then((res) => {
+            if(!res.ok) {
+                return res.json()
+                    .then(errorData => {
+                        throw new Error(errorData.message);
+                    });
+            }
             swal({
                 title: "Submitted",
                 text: "Address registered successfully",
@@ -288,9 +312,9 @@ const AddressInput = () => {
               })
             
         })
-        .catch(() => {
+        .catch((err) => {
             setIsSubmitLoading(false)
-            setSubmitError("opps! something went wrong. Kindly check your address.");
+            setSubmitError(err.message || "opps! something went wrong. Kindly check your address.");
         })
     }
 
@@ -330,7 +354,7 @@ const AddressInput = () => {
                 <div id='map'>
                     
                 </div>
-                <p style={{textAlign: "center", marginBottom: "0px", fontSize: "0.7rem"}}>Kindly adjust the map (zoom in or out) to confirm you address.</p>
+                <p style={{textAlign: "center", marginBottom: "0px", fontSize: "0.7rem", padding: "0 1rem"}}>Kindly adjust the map (zoom in or out) to confirm you address.</p>
                 <div className={classes.modal_button}>
                     <button className={classes.cancel_btn} onClick={closeMapHandler}>Close</button>
                     <button className={classes.confirm__btn} onClick={confirmMapHandler}>Confirm</button>
